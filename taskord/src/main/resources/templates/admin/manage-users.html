@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Manage Users | Taskcord Admin</title>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/styles.css}" rel="stylesheet" />
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
+        <a class="navbar-brand" href="#">Taskcord</a>
+        <div class="ms-auto">
+            <form th:action="@{/logout}" method="post">
+                <button class="btn btn-outline-light">Logout</button>
+            </form>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <h3 class="mb-3">🛠️ Manage Users</h3>
+
+        <div th:if="${users.size() == 0}">
+            <p class="text-muted">No users found.</p>
+        </div>
+
+        <table class="table table-bordered table-hover" th:if="${users.size() > 0}">
+            <thead class="table-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Change Role</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="user, iterStat : ${users}">
+                    <td th:text="${iterStat.index + 1}"></td>
+                    <td th:text="${user.name}"></td>
+                    <td th:text="${user.email}"></td>
+                    <td th:text="${user.role}"></td>
+                    <td>
+                        <form th:action="@{'/admin/assign-role/' + ${user.id}}" method="post" class="d-flex gap-2">
+                            <select name="role" class="form-select form-select-sm" required>
+                                <option value="ADMIN" th:selected="${user.role == 'ADMIN'}">Admin</option>
+                                <option value="MANAGER" th:selected="${user.role == 'MANAGER'}">Manager</option>
+                                <option value="TEAM_MEMBER" th:selected="${user.role == 'TEAM_MEMBER'}">Team Member
+                                </option>
+                                <option value="INDIVIDUAL_USER" th:selected="${user.role == 'INDIVIDUAL_USER'}">
+                                    Individual User</option>
+                            </select>
+                            <button class="btn btn-sm btn-primary" type="submit">Update</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form th:action="@{'/admin/delete/' + ${user.id}}" method="post"
+                            onsubmit="return confirm('Delete this user?');">
+                            <button class="btn btn-sm btn-danger" type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+
+</html>

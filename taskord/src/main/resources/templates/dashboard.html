@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Dashboard | Taskcord</title>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/styles.css}" rel="stylesheet" />
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
+        <a class="navbar-brand" href="#">Taskcord</a>
+        <div class="ms-auto">
+            <form th:action="@{/logout}" method="post">
+                <button class="btn btn-outline-light">Logout</button>
+            </form>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h3 class="mb-3">Welcome, <span th:text="${user.name}">User</span> 👋</h3>
+                <p>Your role is: <strong th:text="${user.role}">ROLE</strong></p>
+
+                <div th:switch="${user.role}">
+                    <div th:case="'ADMIN'">
+                        <a th:href="@{/admin/manage-users}" class="btn btn-primary">Manage Users</a>
+                    </div>
+                    <div th:case="'MANAGER'">
+                        <a th:href="@{/tasks/assign}" class="btn btn-success">Assign Tasks</a>
+                    </div>
+                    <div th:case="'TEAM_MEMBER'">
+                        <a th:href="@{/tasks/assigned}" class="btn btn-info">View Assigned Tasks</a>
+                    </div>
+                    <div th:case="'INDIVIDUAL_USER'">
+                        <a th:href="@{/tasks/my}" class="btn btn-warning">My Tasks</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

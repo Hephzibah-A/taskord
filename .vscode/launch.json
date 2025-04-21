@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-TaskordApplication<taskord>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.taskord.TaskordApplication",
+      "projectName": "taskord",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}

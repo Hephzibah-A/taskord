@@ -1,0 +1,33 @@
+body {
+    background-color: #f4f6f8;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.card {
+    border: none;
+    border-radius: 10px;
+}
+
+.btn-primary {
+    background-color: #3f00a3;
+    border-color: #3f00a3;
+}
+
+.btn-primary:hover {
+    background-color: #4400b3;
+    border-color: #4400b3;
+}
+
+.navbar-dark.bg-dark {
+    background: linear-gradient(90deg, #3f00a3, #4400b3);
+}
+
+h2,
+h3,
+h4 {
+    color: #3f00a3;
+}
+
+a.btn {
+    margin-top: 10px;
+}
